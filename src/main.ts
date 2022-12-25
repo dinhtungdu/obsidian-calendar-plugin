@@ -124,7 +124,8 @@ export default class CalendarPlugin extends Plugin {
   }
 
   public shouldUseISOWeekNumbers(): boolean {
-    return this.app.plugins.getPlugin("periodic-notes")?.isWeeklyFormatISO8601() ?? false;
+    const settings = get(this.settings);
+    return "iso-8601" === settings.weekNumberingPreference;
   }
 
   private async onUpdateSettings(newSettings: ISettings): Promise<void> {

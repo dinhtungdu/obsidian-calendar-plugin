@@ -5,7 +5,7 @@ import builtins from "builtin-modules";
 import sveltePlugin from "esbuild-svelte";
 import sveltePreprocess from "svelte-preprocess";
 
-import manifest from "./manifest.json";
+import manifest from "./manifest.json" assert { type: "json" };
 
 config();
 
@@ -18,11 +18,11 @@ if you want to view the source, please visit the github repository of this plugi
 const prod = process.argv[2] === "production";
 const watch = process.argv[2] === "watch";
 let outdir = "./";
-// if (!prod) {
-//   const vaultDir =
-//     process.env.REAL === "1" ? process.env.REAL_VAULT : process.env.TEST_VAULT;
-//   outdir = `${vaultDir}.obsidian/plugins/${manifest.id}`;
-// }
+if (!prod) {
+  const vaultDir =
+    process.env.REAL === "1" ? process.env.REAL_VAULT : process.env.TEST_VAULT;
+  outdir = `${vaultDir}.obsidian/plugins/${manifest.id}`;
+}
 
 console.info(`\nSaving plugin to ${outdir}\n`);
 

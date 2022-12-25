@@ -99,6 +99,14 @@
     app.workspace.requestSaveLayout();
   }
 
+  async function refreshVisibleSources() {
+    visibleSources = sources.filter((s) => selectedSourceIds.includes(s.id));
+    persistedViewState.selectedSourceIds = [];
+    app.workspace.requestSaveLayout();
+    persistedViewState.selectedSourceIds = selectedSourceIds;
+    app.workspace.requestSaveLayout();
+  }
+
   function updatePopover(event: CustomEvent) {
     const { metadata, target } = event.detail;
 
@@ -174,6 +182,7 @@
     {sourceSettings}
     {selectedSourceIds}
     on:changeSources={updateVisibleSources}
+    on:switchCalendarSet={refreshVisibleSources}
   />
   <div class="calendar-content">
     <Nav

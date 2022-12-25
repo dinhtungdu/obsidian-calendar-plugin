@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { App, CalendarSet, EventRef } from "obsidian";
   import { setIcon } from "obsidian";
-  import { onDestroy, onMount, tick } from "svelte";
+  import { onDestroy, onMount, tick, createEventDispatcher } from "svelte";
   import { createPopperActions } from "svelte-popperjs";
   import { fly } from "svelte/transition";
 
@@ -15,6 +15,7 @@
   const extraOpts = {
     modifiers: [{ name: "offset", options: { offset: [0, 8] } }],
   };
+  const dispatch = createEventDispatcher();
 
   export let app: App;
 
@@ -71,6 +72,7 @@
     app.plugins
       .getPlugin("periodic-notes")
       .calendarSetManager.setActiveCalendarSet(calendarSet.id);
+    dispatch("switchCalendarSet");
   }
 
   onMount(() => {

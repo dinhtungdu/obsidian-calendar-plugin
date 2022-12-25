@@ -12,7 +12,7 @@
 </script>
 
 <div class="toolbar-container">
-  <CalendarSetSwitcher {app} />
+  <CalendarSetSwitcher {app} on:switchCalendarSet />
   <SourcesToggler on:changeSources {sources} {selectedSourceIds} />
 </div>
 

@@ -103,13 +103,15 @@
       <div
         class="calendar-source"
         animate:flip={{ duration: 100 }}
-        on:click|stopPropagation={() =>
-          router.navigate(["Calendar", source.name])}
       >
         <DragHandle {dragDisabled} {startDrag} {handleKeyDown} />
         <Picker bind:value={$settings.sourceSettings[source.sourceId].color} />
         <div class="source-info">
-          <div class="source-name">
+          <div
+            class="source-name"
+            on:click|stopPropagation={() =>
+              router.navigate(["Calendar", source.name])}
+          >
             {source.name}
           </div>
           <div class="source-description setting-item-description">
